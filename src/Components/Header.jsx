@@ -9,7 +9,6 @@ function Header({ cartTotal, product, selectedCards }) {
 
   const showCartData = function (id) {
     setShowModal(true);
-    console.log(selectedCards)
   };
   return (
     <>
@@ -36,7 +35,6 @@ function Header({ cartTotal, product, selectedCards }) {
         <ShowCartResult
           show={showModal}
           handleClose={() => setShowModal(false)}
-          selectedCards={selectedCards}
         />
       )}
     </>

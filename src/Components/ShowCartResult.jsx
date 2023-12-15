@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { CartInfo } from "../Store/CartInfo";
 
-function ShowCartResult({ show, handleClose, selectedCards }) {
+function ShowCartResult({ show, handleClose }) {
+  const cardInfo = useContext(CartInfo);
+  
   return (
     <>
       <Modal show={show} onHide={handleClose}>
@@ -9,11 +13,11 @@ function ShowCartResult({ show, handleClose, selectedCards }) {
           <Modal.Title>Total Quantities and Products</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Quantity: <b>{selectedCards.length}</b>
+          Quantity: <b>{cardInfo.selectedCards.length}</b>
         </Modal.Body>
         <Modal.Body>
           Products: 
-          {selectedCards.map((productsTitle) => (
+          {cardInfo.selectedCards.map((productsTitle) => (
             <b><span> {productsTitle.title},</span></b>
           ))}
         </Modal.Body>
