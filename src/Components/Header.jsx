@@ -4,7 +4,7 @@ import classes from "../Store/Header.module.css";
 import { useState } from "react";
 import ShowCartResult from "./ShowCartResult";
 
-function Header({ cartTotal, product, selectedCards }) {
+function Header({ cartTotal, product }) {
   const [showModal, setShowModal] = useState(false);
 
   const showCartData = function (id) {

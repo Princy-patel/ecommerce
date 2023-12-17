@@ -5,7 +5,7 @@ import { CartInfo } from "../Store/CartInfo";
 import { ProductDesc } from "./ProductDesc";
 import AddQuantity from "./AddQuantity";
 
-function SingleProduct({ data, addPrice }) {
+function SingleProduct({ data, addPrice, addMoreProducts }) {
   const [modalInfo, setModalInfo] = useState({
     showModal: false,
     productId: null,
@@ -15,13 +15,18 @@ function SingleProduct({ data, addPrice }) {
   const cartInfo = useContext(CartInfo);
 
   const onAddPrice = function (id) {
-    addPrice(id, data);
-    let quantity = cartInfo.selectedCards.filter(
+    // addPrice(id, data);
+    cartInfo.setCartTotal(cartInfo.cartTotal + data.price);
+    cartInfo.setSelectedCards((prevState) => [...prevState, data]);
+
+    let newQuantity = cartInfo.selectedCards.filter(
       (cards) => cards.id === id
     ).length;
-    if (quantity >= 1) {
-      setModalInfo({ quantity: true });
+    if (newQuantity >= 1) {
+      setModalInfo({ ...modalInfo, quantity: true });
     }
+
+    console.log(cartInfo.selectedCards);
   };
 
   return (
@@ -38,7 +43,7 @@ function SingleProduct({ data, addPrice }) {
           </Card.Title>
           <Card.Text>{data.description}</Card.Text>
           {modalInfo.quantity ? (
-            <AddQuantity />
+            <AddQuantity data={data} selectedCards={cartInfo.selectedCards} />
           ) : (
             <Button variant="primary" onClick={onAddPrice.bind(null, data.id)}>
               ${data.price} - Add to Cart

@@ -25,21 +25,22 @@ function App() {
 
   const addPrice = function (id, data) {
     setCartTotal(cartTotal + data.price);
-    setSelectedCards((prevState) => [...prevState, data]);
+    setSelectedCards((prevState) =>  [...prevState, data]);
   };
 
   return (
     <>
-      <CartInfo.Provider value={{ cartTotal, setCartTotal, selectedCards }}>
-        <Header
-          cartTotal={cartTotal}
-          product={product}
-        />
+      <CartInfo.Provider value={{ cartTotal, setCartTotal, selectedCards, setSelectedCards }}>
+        <Header cartTotal={cartTotal} product={product} />
         <Container className="mt-5">
           <Row>
             {product.map((data, index) => (
               <Col key={index} md={3} className="mb-4">
-                <SingleProduct data={data} addPrice={addPrice} selectedCards={selectedCards}/>
+                <SingleProduct
+                  data={data}
+                  addPrice={addPrice}
+                  // addMoreProducts={addMoreProducts}
+                />
               </Col>
             ))}
           </Row>
