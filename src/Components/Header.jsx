@@ -1,12 +1,13 @@
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import classes from "../Store/Header.module.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ShowCartResult from "./ShowCartResult";
+import { CartInfo } from "../Store/CartInfo";
 
-function Header({ cartTotal, product }) {
+function Header({ product }) {
   const [showModal, setShowModal] = useState(false);
-
+  const cardInfo = useContext(CartInfo);
   const showCartData = function (id) {
     setShowModal(true);
   };
@@ -25,7 +26,12 @@ function Header({ cartTotal, product }) {
               onClick={showCartData.bind(null, product.id)}
               style={{ cursor: "pointer" }}
             >
-              Cart: {cartTotal}$
+              Cart:{" "}
+              {cardInfo.selectedCards.reduce(
+                (acc, curr) => acc + curr.price,
+                0
+              )}
+              $
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>

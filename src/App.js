@@ -23,14 +23,11 @@ function App() {
     fetchData();
   }, []);
 
-  const addPrice = function (id, data) {
-    setCartTotal(cartTotal + data.price);
-    setSelectedCards((prevState) =>  [...prevState, data]);
-  };
-
   return (
     <>
-      <CartInfo.Provider value={{ cartTotal, setCartTotal, selectedCards, setSelectedCards }}>
+      <CartInfo.Provider
+        value={{ cartTotal, setCartTotal, selectedCards, setSelectedCards }}
+      >
         <Header cartTotal={cartTotal} product={product} />
         <Container className="mt-5">
           <Row>
@@ -38,7 +35,6 @@ function App() {
               <Col key={index} md={3} className="mb-4">
                 <SingleProduct
                   data={data}
-                  addPrice={addPrice}
                   // addMoreProducts={addMoreProducts}
                 />
               </Col>

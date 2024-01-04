@@ -3,24 +3,26 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import { CartInfo } from "../Store/CartInfo";
-import ShowCartResult from "./ShowCartResult";
 
-function AddQuantity({ data, addMoreProducts }) {
-  const [counter, setCounter] = useState([]);
-  const [product, setProduct] = useState(false);
+function AddQuantity({ data }) {
+  const [totalProduct, setTotalProduct] = useState([]);
 
   const cardInfo = useContext(CartInfo);
 
+  // Add product when i click on add button
   const addProducts = function (id) {
-    let newProduct = cardInfo.selectedCards.filter(
+    let newProduct = cardInfo.selectedCards.find(
       (products) => products.id === id
     );
+
     cardInfo.setSelectedCards([...cardInfo.selectedCards, newProduct]);
-    // setProduct(true)
+    setTotalProduct(cardInfo.selectedCards.filter((cards) => cards.id === id));
+  };
 
-    console.log(cardInfo.selectedCards);
-
-    // addMoreProducts(id, setCounter, counter);
+  // Remove product when i click on "-" button
+  const removeProduct = function (id) {
+    let updatedCards = [...cardInfo.selectedCards];
+   
   };
 
   return (
@@ -29,12 +31,13 @@ function AddQuantity({ data, addMoreProducts }) {
         <Button
           style={{ zIndex: "0" }}
           variant="danger"
+          onClick={removeProduct.bind(null, data.id)}
         >
           -
         </Button>
         <Form.Control
           aria-label="Dollar amount (with dot and two decimal places)"
-          value={counter.length}
+          value={totalProduct.length + 1}
         />
         <Button
           style={{ zIndex: "0" }}
@@ -45,7 +48,7 @@ function AddQuantity({ data, addMoreProducts }) {
         </Button>
       </InputGroup>
 
-      {product && <ShowCartResult counter={counter} />}
+      {/* {product && <ShowCartResult counter={counter} />} */}
     </>
   );
 }

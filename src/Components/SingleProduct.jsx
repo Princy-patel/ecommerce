@@ -5,28 +5,18 @@ import { CartInfo } from "../Store/CartInfo";
 import { ProductDesc } from "./ProductDesc";
 import AddQuantity from "./AddQuantity";
 
-function SingleProduct({ data, addPrice, addMoreProducts }) {
+function SingleProduct({ data }) {
   const [modalInfo, setModalInfo] = useState({
     showModal: false,
     productId: null,
     quantity: false,
   });
-
   const cartInfo = useContext(CartInfo);
 
-  const onAddPrice = function (id) {
-    // addPrice(id, data);
+  const onAddPrice = function () {
     cartInfo.setCartTotal(cartInfo.cartTotal + data.price);
-    cartInfo.setSelectedCards((prevState) => [...prevState, data]);
-
-    let newQuantity = cartInfo.selectedCards.filter(
-      (cards) => cards.id === id
-    ).length;
-    if (newQuantity >= 1) {
-      setModalInfo({ ...modalInfo, quantity: true });
-    }
-
-    console.log(cartInfo.selectedCards);
+    cartInfo.setSelectedCards([...cartInfo.selectedCards, data]);
+    setModalInfo({ quantity: true });
   };
 
   return (

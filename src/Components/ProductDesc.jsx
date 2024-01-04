@@ -12,7 +12,9 @@ export const ProductDesc = ({ productId, show, handleClose }) => {
       .then((res) => res.json())
       .then((data) => {
         setProductData(data);
-        setIsLoading(false);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 3000);
       });
   };
 
@@ -24,8 +26,8 @@ export const ProductDesc = ({ productId, show, handleClose }) => {
     <>
       <Modal show={show} onHide={handleClose}>
         {isLoading ? (
-          <Spinner animation="border" role="status">
-            <span className="visually-hidden">Loading...</span>
+          <Spinner animation="border" role="status" className="m-5">
+            <span className="visually-hidden fs-4">Loading...</span>
           </Spinner>
         ) : (
           <>

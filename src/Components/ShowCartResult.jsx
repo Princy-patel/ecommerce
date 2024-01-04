@@ -5,6 +5,7 @@ import { CartInfo } from "../Store/CartInfo";
 
 function ShowCartResult({ show, handleClose }) {
   const cardInfo = useContext(CartInfo);
+
   return (
     <>
       <Modal show={show} onHide={handleClose}>
@@ -13,6 +14,20 @@ function ShowCartResult({ show, handleClose }) {
         </Modal.Header>
         <Modal.Body>
           Quantity: <b>{cardInfo.selectedCards.length}</b>
+        </Modal.Body>
+        <Modal.Body>
+          Price :{" "}
+          {cardInfo.selectedCards.map((productPrice, index) => (
+            <b key={index}>
+              <span>{productPrice.price}, </span>
+            </b>
+          ))}
+        </Modal.Body>
+        <Modal.Body>
+          TotalPrice :{" "}
+          <b>
+            {cardInfo.selectedCards.reduce((acc, curr) => acc + curr.price, 0)}
+          </b>
         </Modal.Body>
         <Modal.Body>
           Products:
