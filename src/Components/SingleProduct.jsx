@@ -21,7 +21,7 @@ function SingleProduct({ data }) {
 
   return (
     <>
-      <Card style={{ width: "18rem" }}>
+      <Card style={{ width: "18rem", height: "100%" }}>
         <Card.Img variant="top" src={data.thumbnail} />
         <Card.Body>
           <Card.Title

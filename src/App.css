@@ -2,3 +2,11 @@
   position: sticky;
   top: 0;
 }
+
+.promocode{
+  margin: 22px;
+  border: 2px solid #d7d2d2;
+  cursor: pointer;
+  padding: 12px;
+  letter-spacing: 1px;
+}

@@ -8,7 +8,7 @@ import { CartInfo } from "../Store/CartInfo";
 function Header({ product }) {
   const [showModal, setShowModal] = useState(false);
   const cardInfo = useContext(CartInfo);
-  const showCartData = function (id) {
+  const showCartData = function () {
     setShowModal(true);
   };
   return (

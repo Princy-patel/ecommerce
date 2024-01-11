@@ -10,23 +10,24 @@ function ShowCartResult({ show, handleClose }) {
     <>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Total Quantities and Products</Modal.Title>
+          <Modal.Title>ORDER SUMMARY</Modal.Title>
         </Modal.Header>
+        <div className="promocode">HAVE A PROMO CODE?</div>
         <Modal.Body>
           Quantity: <b>{cardInfo.selectedCards.length}</b>
         </Modal.Body>
         <Modal.Body>
-          Price :{" "}
+          Price :
           {cardInfo.selectedCards.map((productPrice, index) => (
             <b key={index}>
-              <span>{productPrice.price}, </span>
+              <span>${productPrice.price}, </span>
             </b>
           ))}
         </Modal.Body>
         <Modal.Body>
-          TotalPrice :{" "}
+          TotalPrice :
           <b>
-            {cardInfo.selectedCards.reduce((acc, curr) => acc + curr.price, 0)}
+            ${cardInfo.selectedCards.reduce((acc, curr) => acc + curr.price, 0)}
           </b>
         </Modal.Body>
         <Modal.Body>
@@ -38,11 +39,8 @@ function ShowCartResult({ show, handleClose }) {
           ))}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
+          <Button variant="dark" onClick={handleClose} className="w-100">
+            PROCEED TO CHECKOUT
           </Button>
         </Modal.Footer>
       </Modal>
